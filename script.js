@@ -1,23 +1,27 @@
 var pTimeRows = document.querySelectorAll(".time-block");
+
+
+var currentDate = dayjs();
+$("#currentDay").text(currentDate.format('dddd, MMMM D YYYY, h:mm:ss a'));
+
 $(function () {
   localStorageRetrival();
   //used a combination of JQ and vanilla-JS
 
   var AllsButtons = $(".saveBtn");
 
-  //BSC helped me here. So for the jquery selector $(“.saveBtn”) it is getting an array of all the save buttons, jquery is actually able to do it without the loop.
+  //BSC helped me here. So for the jquery selector $(“.saveBtn”) it is getting an array of all the save buttons, apperently jquery is actually able to do it without the loop.
   AllsButtons.on("click", function () {
-    console.log("test")
+    // console.log("test")
     var textArea = this.closest(".time-block");
     //They wanted us to use the actual Id element.
     var textAreaId = textArea.getAttribute("id");
-    // var userText = textArea.querySelector(".description").value;
+    var userText = textArea.querySelector(".description").value;
+
     // Instructor helped with this line because he said we haven't learned inner #$ in the course yet
     $(`#${textAreaId} .description`).val(userText);
-
     // var userText = textArea.$(".description").val();
-
-    console.log(userText, textAreaId);
+    //console.log(userText, textAreaId);
     localStorage.setItem(textAreaId, userText);
   });
 
@@ -55,7 +59,7 @@ $(function () {
     for (var i = 0; i < pTimeRows.length; i++) {
       var textArea = pTimeRows[i];
       var textAreaId = textArea.getAttribute("id");
-      console.log(textArea, textAreaId);
+      // console.log(textArea, textAreaId);
       var userText = localStorage.getItem(textAreaId);
 
       if (userText) {
@@ -69,14 +73,17 @@ $(function () {
   }
 
 
-  console.log(pTimeRows);
+  // console.log(pTimeRows);
 
   //Takes local storage and adds the functions to 
   function addTextandColor(textArea) {
     for (var i = 0; i < pTimeRows.length; i++) {
       var hour = parseInt(textArea.getAttribute("id").split("-")[1]);
+
       //This recives the current date in string form and converts into an interger so the dayjs() can read it.
       var currentHour = parseInt(dayjs().format("H"));
+      // // A Random time stamp I picked that can be used to show time color changes when I troubleshooting the coding 
+      // var currentHour = parseInt(dayjs(1102337876).format("H"));
       var textArea = pTimeRows[i];
 
       // if the hours is less the current hour disable present and future classes and turn the row gray using a data atrribue function
@@ -101,4 +108,6 @@ $(function () {
     var currentDate = dayjs();
     $("#currentDay").text(currentDate.format('dddd, MMMM D YYYY, h:mm:ss a'));
   }
+
+
 });
