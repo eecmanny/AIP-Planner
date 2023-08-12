@@ -1,5 +1,9 @@
 API-Planner
 
+https://eecmanny.github.io/Plan-my-day/
+https://github.com/eecmanny/Plan-my-day
+
+
 A user wants to add important events to a daily planner so that they can manage my there time more effectively.
 
 
